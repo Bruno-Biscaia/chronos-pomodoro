@@ -1,6 +1,6 @@
 # Chronos Pomodoro
 
-Um **timer Pomodoro** web, construído com **React 19**, **TypeScript** e **Vite**, que ajuda a organizar ciclos de trabalho e descanso de forma simples e eficiente.
+Um **timer Pomodoro** web, construído com **React 19** + **TypeScript** e **Vite**, que ajuda a organizar ciclos de trabalho e descanso de forma simples e eficiente.
 
 ---
 
