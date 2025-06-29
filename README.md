@@ -1,54 +1,147 @@
-# React + TypeScript + Vite
+# Chronos Pomodoro
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Um **timer Pomodoro** web, construído com **React 19**, **TypeScript** e **Vite**, que ajuda a organizar ciclos de trabalho e descanso de forma simples e eficiente.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📝 Descrição
 
-## Expanding the ESLint configuration
+O Chronos Pomodoro permite:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Iniciar ciclos de **25 min** de foco (trabalho) e intercalar com pausas curtas (5 min) e longas (15 min).
+- Pausar, interromper ou resetar o ciclo atual.
+- Receber notificação sonora ao fim de cada sessão.
+- Acompanhar o histórico de tarefas concluídas e interrompidas.
+- Customizar os tempos de foco, pausa curta e pausa longa.
+- Manter o estado sincronizado com o **localStorage**, permitindo retomar mesmo após fechar o navegador.
+- Atualização dinâmica do título da aba com o tempo restante.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+---
+
+## 🚀 Tecnologias
+
+- **Framework**: React 19 + Vite
+- **Tipagem**: TypeScript
+- **State management**: Context API + `useReducer`
+- **Web Worker**: `TimerWorkerManager` para contagem de tempo off-thread
+- **Data**: `date-fns`
+- **UI**:
+  - Ícones: `lucide-react`
+  - Rotas: `react-router` (v7)
+  - Toasts: `react-toastify`
+- **Estilos**: CSS modular em `src/styles/global.css` e `src/styles/theme.css`
+
+---
+
+## 📂 Estrutura
+
+```
+📦 src
+ ┣ 📂 assets
+ ┃ ┗ 📂 audios
+ ┃   ┗ gravitational_beep.mp3
+ ┣ 📂 components
+ ┃ ┗ … (UI: botões, listas, formulários)
+ ┣ 📂 contexts
+ ┃ ┗ TaskContext/  
+ ┃     ┣ initialTaskState.ts  
+ ┃     ┣ taskActions.ts  
+ ┃     ┣ taskReducer.ts  
+ ┃     ┗ TaskContextProvider.tsx  
+ ┣ 📂 models
+ ┃ ┣ TaskModel.ts  
+ ┃ ┗ TaskStateModel.ts  
+ ┣ 📂 routers
+ ┃ ┗ MainRouter.tsx  
+ ┣ 📂 utils
+ ┃ ┣ formatSecondsToMinutes.ts  
+ ┃ ┣ getNextCycle.ts  
+ ┃ ┗ loadBeep.ts  
+ ┣ 📂 workers
+ ┃ ┣ TimerWorkerManager.ts  
+ ┃ ┗ timerWorker.js  
+ ┣ 📂 styles
+ ┃ ┣ global.css  
+ ┃ ┗ theme.css  
+ ┗ App.tsx
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## ⚙️ Primeiros passos
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+1. **Pré-requisitos**
+
+   - Node.js 16+
+   - npm ou yarn
+
+2. **Instalação**
+
+   ```bash
+   # Clone o repositório
+   git clone https://github.com/Bruno-Biscaia/chronos-pomodoro.git
+   cd chronos-pomodoro
+
+   # Instale as dependências
+   npm install
+   # ou
+   yarn
+   ```
+
+3. **Modo desenvolvimento**
+
+   ```bash
+   npm run dev
+   # abre em http://localhost:5173
+   ```
+
+4. **Build para produção**
+
+   ```bash
+   npm run build
+   ```
+
+5. **Preview da build**
+
+   ```bash
+   npm run preview
+   ```
+
+---
+
+## ⭐ Funcionalidades
+
+- **Iniciar/Parar**: botão para iniciar e interromper o timer.
+- **Reset**: limpar o ciclo atual e histórico.
+- **Histórico**: registro de tarefas concluídas e interrompidas, com timestamp.
+- **Configurações**: ajustar tempos de foco, pausas curtas e longas.
+- **Notificações**: alerta sonoro ao concluir cada sessão.
+- **Persistência**: estado salvo no `localStorage` para continuidade.
+
+---
+
+## 🤝 Contribuição
+
+1. Faça um **fork** do projeto
+2. Crie uma **branch** para sua feature/bugfix
+   ```bash
+   git checkout -b feature/minha-nova-funcionalidade
+   ```
+3. Commit e push
+   ```bash
+   git commit -m "Descrição da mudança"
+   git push origin feature/minha-nova-funcionalidade
+   ```
+4. Abra um **Pull Request** aqui no GitHub
+
+---
+
+## 📝 Licença
+
+Atualmente não há arquivo de licença neste repositório.\
+Se desejar tornar este projeto open-source, adicione um arquivo `LICENSE` (por exemplo, [MIT](https://opensource.org/licenses/MIT)).
+
+---
+
+> Desenvolvido por **Bruno Biscaia**
+
